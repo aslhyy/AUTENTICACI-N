@@ -1,7 +1,9 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from .models import Task
-from .serializers import TaskSerializer, RegisterSerializer
+from rest_framework import generics
+from .serializers import TaskSerializer
+
 
 class TaskListCreateView(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
@@ -20,8 +22,3 @@ class TaskDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
-
-
-class RegisterView(generics.CreateAPIView):
-    serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]

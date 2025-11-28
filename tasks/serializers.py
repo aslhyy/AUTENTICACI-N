@@ -12,8 +12,8 @@ class TaskSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ('username', 'password')
+        ref_name = "TasksRegisterSerializer"
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
